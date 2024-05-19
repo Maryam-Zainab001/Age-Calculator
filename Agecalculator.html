@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Age Calculator</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color:#66bb66 ;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 350px;
+    text-align: center;
+  }
+
+  .card h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .card label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+  }
+
+  .card input[type="date"],
+  .card button {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .card button {
+    background-color: #66bb66; 
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .card button:hover {
+    background-color:#90ee90;
+  }
+
+  .result {
+    font-size: 18px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h2>Calculate Your Age</h2>
+      <label for="birthdate">Enter Your Birthdate:</label>
+      <input type="date" id="birthdate">
+      <button onclick="calculateAge()">Calculate Age</button>
+      <p id="ageResult" class="result"></p>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthdate = new Date(document.getElementById('birthdate').value);
+      const today = new Date();
+
+      let ageYears = today.getFullYear() - birthdate.getFullYear();
+      let ageMonths = today.getMonth() - birthdate.getMonth();
+      let ageDays = today.getDate() - birthdate.getDate();
+
+      if (ageDays < 0) {
+        ageMonths--;
+        ageDays += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (ageMonths < 0) {
+        ageYears--;
+        ageMonths += 12;
+      }
+
+      document.getElementById('ageResult').innerHTML = `You are ${ageYears} years, ${ageMonths} months, and ${ageDays} days old.`;
+    }
+  </script>
+</body>
+</html>
+
+
+ 
